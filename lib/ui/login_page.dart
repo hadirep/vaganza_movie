@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vaganza_movie/common/styles.dart';
-import 'package:vaganza_movie/ui/home_page.dart';
+import 'package:vaganza_movie/data/service/auth_service.dart';
 import 'package:vaganza_movie/ui/reset_password_page.dart';
 import 'package:vaganza_movie/ui/register_page.dart';
 
@@ -15,10 +15,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _auth = FirebaseAuth.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-
   bool _obscureText = true;
   bool _isLoading = false;
 
@@ -51,7 +49,8 @@ class _LoginPageState extends State<LoginPage> {
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
-                  icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+                  icon: Icon(
+                      _obscureText ? Icons.visibility : Icons.visibility_off),
                   onPressed: () {
                     setState(() {
                       _obscureText = !_obscureText;
@@ -74,21 +73,17 @@ class _LoginPageState extends State<LoginPage> {
                   _isLoading = true;
                 });
                 try {
-                  final navigator = Navigator.of(context);
                   final email = _emailController.text;
                   final password = _passwordController.text;
 
-                  await _auth.signInWithEmailAndPassword(
-                    email: email,
-                    password: password,
-                  );
-
-                  navigator.pushReplacementNamed(HomePage.routeName);
+                  await AuthService().login(email, password, context);
                 } catch (e) {
-                  if (e is FirebaseAuthException && e.code == 'wrong-password') {
+                  if (e is FirebaseAuthException &&
+                      e.code == 'wrong-password') {
                     _showErrorSnackbar('The password you entered is incorrect');
                   } else {
-                    _showErrorSnackbar('The email or password you entered is incorrect');
+                    _showErrorSnackbar(
+                        'The email or password you entered is incorrect');
                   }
                 } finally {
                   setState(() {
@@ -103,14 +98,16 @@ class _LoginPageState extends State<LoginPage> {
                 'Does not have an account yet? Register here',
                 style: TextStyle(color: secondaryColor),
               ),
-              onPressed: () => Navigator.pushNamed(context, RegisterPage.routeName),
+              onPressed: () =>
+                  Navigator.pushNamed(context, RegisterPage.routeName),
             ),
             TextButton(
               child: const Text(
                 'Forgot your password? Click here',
                 style: TextStyle(color: secondaryColor),
               ),
-              onPressed: () => Navigator.pushNamed(context, ResetPasswordPage.routeName),
+              onPressed: () =>
+                  Navigator.pushNamed(context, ResetPasswordPage.routeName),
             ),
           ],
         ),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:vaganza_movie/model/movie_model.dart';
 import 'package:vaganza_movie/ui/home_page.dart';
-import 'package:vaganza_movie/model/upcoming_model.dart';
 import 'package:vaganza_movie/widget/favorite_button.dart';
 
 var fontStyle = const TextStyle(fontFamily: "fonts/RobotoCondensed-Bold.ttf");
 
 class UpcomingDetailPage extends StatefulWidget {
-  final UpcomingModel place;
+  final MovieModel upcomingModel;
 
-  const UpcomingDetailPage({Key? key, required this.place}) : super(key: key);
+  const UpcomingDetailPage({Key? key, required this.upcomingModel}) : super(key: key);
 
   @override
   State<UpcomingDetailPage> createState() => _UpcomingDetailPageState();
@@ -49,14 +49,14 @@ class _UpcomingDetailPageState extends State<UpcomingDetailPage> {
                   children: <Widget>[
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(widget.place.imageAsset,
+                      child: Image.network(widget.upcomingModel.image,
                           width: 350, height: 499),
                     ),
                     const SizedBox(height: 10),
                     Column(
                       children: [
                         Text(
-                          widget.place.name,
+                          widget.upcomingModel.name,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 20,
@@ -74,7 +74,7 @@ class _UpcomingDetailPageState extends State<UpcomingDetailPage> {
                           children: <Widget>[
                             const SizedBox(width: 8),
                             Text(
-                              "Genre:\n${widget.place.genre}",
+                              "Genre:\n${widget.upcomingModel.genre}",
                               style: fontStyle,
                             ),
                           ],
@@ -87,7 +87,7 @@ class _UpcomingDetailPageState extends State<UpcomingDetailPage> {
                       children: <Widget>[
                         const SizedBox(width: 8),
                         Text(
-                          "Durasi:\n${widget.place.duration}",
+                          "Durasi:\n${widget.upcomingModel.duration}",
                           style: fontStyle,
                         ),
                       ],
@@ -97,7 +97,7 @@ class _UpcomingDetailPageState extends State<UpcomingDetailPage> {
                       children: <Widget>[
                         const SizedBox(width: 8),
                         Text(
-                          "Sutradara:\n${widget.place.direction}",
+                          "Sutradara:\n${widget.upcomingModel.director}",
                           style: fontStyle,
                         ),
                       ],
@@ -107,7 +107,7 @@ class _UpcomingDetailPageState extends State<UpcomingDetailPage> {
                       children: <Widget>[
                         const SizedBox(width: 8),
                         Text(
-                          "Rating Usia:\n${widget.place.ageRating}",
+                          "Rating Usia:\n${widget.upcomingModel.ageRating}",
                           style: fontStyle,
                         ),
                       ],
@@ -123,7 +123,7 @@ class _UpcomingDetailPageState extends State<UpcomingDetailPage> {
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       child: Text(
-                        widget.place.synopsis,
+                        widget.upcomingModel.synopsis,
                         textAlign: TextAlign.justify,
                         style: const TextStyle(
                           fontSize: 16,

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:vaganza_movie/ui/home_page.dart';
-import 'package:vaganza_movie/model/play_model.dart';
+import 'package:vaganza_movie/model/movie_model.dart';
 import 'package:vaganza_movie/widget/favorite_button.dart';
 
 var fontStyle = const TextStyle(fontFamily: "fonts/RobotoCondensed-Bold.ttf");
 
 class PlayingDetailPage extends StatefulWidget {
   static const String routeName = 'vaganza_playing_page';
-  final PlayModel place;
+  final MovieModel playingModel;
 
-  const PlayingDetailPage({Key? key, required this.place}) : super(key: key);
+  const PlayingDetailPage({Key? key, required this.playingModel}) : super(key: key);
 
   @override
   State<PlayingDetailPage> createState() => _PlayingDetailPageState();
@@ -19,22 +18,6 @@ class _PlayingDetailPageState extends State<PlayingDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.blue),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
-            );
-          },
-        ),
-        automaticallyImplyLeading: false,
-        title: Center(
-          child: Image.asset('assets/logo.png', width: 180, height: 50),
-        ),
-        backgroundColor: const Color(0xFFFFFFFF),
-      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: 8,
@@ -50,14 +33,16 @@ class _PlayingDetailPageState extends State<PlayingDetailPage> {
                   children: <Widget>[
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(widget.place.imageAsset,
-                          width: 350, height: 499),
+                      child: Image.network(
+                        widget.playingModel.image,
+                        width: 350, height: 499,
+                      ),
                     ),
                     const SizedBox(height: 10),
                     Column(
                       children: [
                         Text(
-                          widget.place.name,
+                          widget.playingModel.name,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 20,
@@ -72,10 +57,10 @@ class _PlayingDetailPageState extends State<PlayingDetailPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
-                          children: <Widget>[
+                          children: [
                             const SizedBox(width: 8),
                             Text(
-                              "Genre:\n${widget.place.genre}",
+                              "Genre:\n${widget.playingModel.genre}",
                               style: fontStyle,
                             ),
                           ],
@@ -88,7 +73,7 @@ class _PlayingDetailPageState extends State<PlayingDetailPage> {
                       children: <Widget>[
                         const SizedBox(width: 8),
                         Text(
-                          "Durasi:\n${widget.place.duration}",
+                          "Durasi:\n${widget.playingModel.duration}",
                           style: fontStyle,
                         ),
                       ],
@@ -98,7 +83,7 @@ class _PlayingDetailPageState extends State<PlayingDetailPage> {
                       children: <Widget>[
                         const SizedBox(width: 8),
                         Text(
-                          "Sutradara:\n${widget.place.director}",
+                          "Sutradara:\n${widget.playingModel.director}",
                           style: fontStyle,
                         ),
                       ],
@@ -108,7 +93,7 @@ class _PlayingDetailPageState extends State<PlayingDetailPage> {
                       children: <Widget>[
                         const SizedBox(width: 8),
                         Text(
-                          "Rating Usia:\n${widget.place.ageRating}",
+                          "Rating Usia:\n${widget.playingModel.ageRating}",
                           style: fontStyle,
                         ),
                       ],
@@ -118,7 +103,7 @@ class _PlayingDetailPageState extends State<PlayingDetailPage> {
                       children: <Widget>[
                         const SizedBox(width: 8),
                         Text(
-                          "Rating Film:\n${widget.place.movieRating}",
+                          "Rating Film:\n${widget.playingModel.movieRating}",
                           style: fontStyle,
                         ),
                       ],
@@ -134,7 +119,7 @@ class _PlayingDetailPageState extends State<PlayingDetailPage> {
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       child: Text(
-                        widget.place.synopsis,
+                        widget.playingModel.synopsis,
                         textAlign: TextAlign.justify,
                         style: const TextStyle(
                           fontSize: 16,

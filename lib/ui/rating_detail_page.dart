@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:vaganza_movie/model/movie_model.dart';
 import 'package:vaganza_movie/ui/home_page.dart';
-import 'package:vaganza_movie/model/rating_model.dart';
 import 'package:vaganza_movie/widget/favorite_button.dart';
 
 var fontStyle = const TextStyle(fontFamily: "fonts/RobotoCondensed-Bold.ttf");
 
 class RatingDetailPage extends StatefulWidget {
-  final RatingModel place;
+  final MovieModel model;
 
-  const RatingDetailPage({Key? key, required this.place}) : super(key: key);
+  const RatingDetailPage({Key? key, required this.model}) : super(key: key);
 
   @override
   State<RatingDetailPage> createState() => _RatingDetailPageState();
@@ -40,23 +40,23 @@ class _RatingDetailPageState extends State<RatingDetailPage> {
           horizontal: 8,
         ),
         child: ListView(
-          children: <Widget>[
+          children: [
             Card(
               child: Container(
                 padding: const EdgeInsets.all(8),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
+                  children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(widget.place.imageAsset,
+                      child: Image.network(widget.model.image,
                           width: 350, height: 499),
                     ),
                     const SizedBox(height: 10),
                     Column(
                       children: [
                         Text(
-                          widget.place.name,
+                          widget.model.name,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 20,
@@ -74,7 +74,7 @@ class _RatingDetailPageState extends State<RatingDetailPage> {
                           children: <Widget>[
                             const SizedBox(width: 8),
                             Text(
-                              "Genre:\n${widget.place.genre}",
+                              "Genre:\n${widget.model.genre}",
                               style: fontStyle,
                             ),
                           ],
@@ -87,7 +87,7 @@ class _RatingDetailPageState extends State<RatingDetailPage> {
                       children: <Widget>[
                         const SizedBox(width: 8),
                         Text(
-                          "Durasi:\n${widget.place.duration}",
+                          "Durasi:\n${widget.model.duration}",
                           style: fontStyle,
                         ),
                       ],
@@ -97,7 +97,7 @@ class _RatingDetailPageState extends State<RatingDetailPage> {
                       children: <Widget>[
                         const SizedBox(width: 8),
                         Text(
-                          "Sutradara:\n${widget.place.direction}",
+                          "Sutradara:\n${widget.model.director}",
                           style: fontStyle,
                         ),
                       ],
@@ -107,7 +107,7 @@ class _RatingDetailPageState extends State<RatingDetailPage> {
                       children: <Widget>[
                         const SizedBox(width: 8),
                         Text(
-                          "Rating Usia:\n${widget.place.ageRating}",
+                          "Rating Usia:\n${widget.model.ageRating}",
                           style: fontStyle,
                         ),
                       ],
@@ -117,7 +117,7 @@ class _RatingDetailPageState extends State<RatingDetailPage> {
                       children: <Widget>[
                         const SizedBox(width: 8),
                         Text(
-                          "Rating Film:\n${widget.place.movieRating}",
+                          "Rating Film:\n${widget.model.movieRating}",
                           style: fontStyle,
                         ),
                       ],
@@ -133,7 +133,7 @@ class _RatingDetailPageState extends State<RatingDetailPage> {
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       child: Text(
-                        widget.place.synopsis,
+                        widget.model.synopsis,
                         textAlign: TextAlign.justify,
                         style: const TextStyle(
                           fontSize: 16,

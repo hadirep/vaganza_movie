@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 class _MainMenu extends State<HomePage> {
   int selectedPage = 0;
 
-  final _page = [const PlayingListPage(), const UpcomingListPage(), const MyAccountPage()];
+  final _page = [const PlayingListPage(), const UpcomingListPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +30,6 @@ class _MainMenu extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.upcoming_outlined),
             label: 'Upcoming',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Account',
           ),
         ],
         selectedItemColor: Colors.blue,

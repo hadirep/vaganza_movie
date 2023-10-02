@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vaganza_movie/common/styles.dart';
+import 'package:vaganza_movie/data/service/auth_service.dart';
 
 class RegisterPage extends StatefulWidget {
   static const String routeName = 'vaganza_register_page';
@@ -12,7 +13,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final _auth = FirebaseAuth.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -88,7 +88,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   _registrationError = null; // Reset the registration error
                 });
                 try {
-                  final navigator = Navigator.of(context);
                   final email = _emailController.text;
                   final password = _passwordController.text;
 
@@ -101,11 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     return; // Don't proceed with registration
                   }
 
-                  await _auth.createUserWithEmailAndPassword(
-                    email: email,
-                    password: password,
-                  );
-                  navigator.pop();
+                  await AuthService().register(email, password, context);
                 } catch (e) {
                   if (e is FirebaseAuthException && e.code == 'email-already-in-use') {
                     _showErrorSnackbar('Your account has already been created');
