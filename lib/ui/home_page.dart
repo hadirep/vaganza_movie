@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vaganza_movie/ui/my_account_page.dart';
 import 'package:vaganza_movie/ui/playing_list_page.dart';
 import 'package:vaganza_movie/ui/upcoming_list_page.dart';
 
