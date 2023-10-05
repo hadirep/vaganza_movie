@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vaganza_movie/common/styles.dart';
 import 'package:vaganza_movie/data/service/storage_service.dart';
-import 'package:vaganza_movie/ui/admin/widget_create_data.dart';
-import 'package:vaganza_movie/ui/admin/widget_update_data.dart';
+import 'package:vaganza_movie/ui/admin/admin_create_data_upcoming.dart';
+import 'package:vaganza_movie/ui/admin/admin_update_data_upcoming.dart';
 
 class AdminUpcomingPage extends StatefulWidget {
   const AdminUpcomingPage({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class _AdminUpcomingPageState extends State<AdminUpcomingPage> {
           title: const Center(
             child: Text(
               'Admin Upcoming',
-              style: TextStyle(color: darkPrimaryColor),
+              style: TextStyle(color: secondaryColor),
             ),
           ),
           backgroundColor: primaryColor,
@@ -49,7 +49,7 @@ class _AdminUpcomingPageState extends State<AdminUpcomingPage> {
                           children: [
                             IconButton(
                               icon: const Icon(Icons.edit),
-                              onPressed: () => update(context, documentSnapshot),
+                              onPressed: () => updateUpcoming(context, documentSnapshot),
                             ),
                             IconButton(
                               icon: const Icon(Icons.delete),
@@ -75,7 +75,7 @@ class _AdminUpcomingPageState extends State<AdminUpcomingPage> {
           },
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => create(context),
+          onPressed: () => createUpcoming(context),
           child: const Icon(Icons.add),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat);

@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vaganza_movie/common/styles.dart';
 import 'package:vaganza_movie/data/service/storage_service.dart';
-import 'package:vaganza_movie/ui/admin/widget_create_data.dart';
-import 'package:vaganza_movie/ui/admin/widget_update_data.dart';
+import 'package:vaganza_movie/ui/admin/admin_create_data_playing.dart';
+import 'package:vaganza_movie/ui/admin/admin_update_data_playing.dart';
 
 class AdminPlayPage extends StatefulWidget {
   const AdminPlayPage({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class _AdminPageState extends State<AdminPlayPage> {
           title: const Center(
             child: Text(
               'Admin Playing',
-              style: TextStyle(color: darkPrimaryColor),
+              style: TextStyle(color: secondaryColor),
             ),
           ),
           backgroundColor: primaryColor,
@@ -49,7 +49,7 @@ class _AdminPageState extends State<AdminPlayPage> {
                           children: [
                             IconButton(
                               icon: const Icon(Icons.edit),
-                              onPressed: () => update(context, documentSnapshot),
+                              onPressed: () => updatePlaying(context, documentSnapshot),
                             ),
                             IconButton(
                               icon: const Icon(Icons.delete),
@@ -75,7 +75,7 @@ class _AdminPageState extends State<AdminPlayPage> {
           },
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => create(context),
+          onPressed: () => createPlay(context),
           child: const Icon(Icons.add),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat);

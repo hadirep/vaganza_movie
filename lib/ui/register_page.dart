@@ -4,9 +4,9 @@ import 'package:vaganza_movie/common/styles.dart';
 import 'package:vaganza_movie/data/service/auth_service.dart';
 
 class RegisterPage extends StatefulWidget {
-  static const String routeName = 'vaganza_register_page';
-
   const RegisterPage({Key? key}) : super(key: key);
+
+  static const String routeName = 'register_page';
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -23,36 +23,50 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: primaryColor,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(55),
+        child: AppBar(
+          elevation: 1,
+          title: const Text(
+            'Daftar Vaganza Movie',
+            style: TextStyle(
+              color: secondaryColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          backgroundColor: primaryColor,
+          leading: IconButton(
+            color: secondaryColor,
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+      ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 30),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : Container(),
-            Image.asset('assets/logo.png'),
-            const SizedBox(height: 12.0),
-            Text(
-              'Create your account',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: 8.0),
+            const Text("EMAIL", style: TextStyle(color: buttonColor)),
             TextField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
                 hintText: 'Email',
               ),
             ),
+            _isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : Container(),
             const SizedBox(height: 8.0),
+            const Text("PASSWORD", style: TextStyle(color: buttonColor)),
             TextField(
               controller: _passwordController,
               obscureText: _obscureText,
               decoration: InputDecoration(
-                border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
                   icon: Icon(
                       _obscureText ? Icons.visibility : Icons.visibility_off),
@@ -65,7 +79,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 hintText: 'Password',
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 8),
             _registrationError != null
                 ? Text(
               _registrationError!,
@@ -76,11 +90,11 @@ class _RegisterPageState extends State<RegisterPage> {
             )
                 : Container(),
             MaterialButton(
-              color: secondaryColor,
+              color: buttonColor,
               textTheme: ButtonTextTheme.primary,
               height: 50,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(8),
               ),
               onPressed: () async {
                 setState(() {
@@ -115,12 +129,26 @@ class _RegisterPageState extends State<RegisterPage> {
               },
               child: const Text('Register'),
             ),
-            TextButton(
-              child: const Text(
-                'Already have an account? Login',
-                style: TextStyle(color: secondaryColor),
+            const SizedBox(height: 15),
+            const Center(
+              child: Text(
+                'Sudah punya akun?',
+                style: TextStyle(color: buttonColor),
+              ),
+            ),
+            const SizedBox(height: 15),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: buttonColor,
+                backgroundColor: primaryColor, // Warna teks pada tombol
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8), // Mengatur border radius
+                  side: const BorderSide(color: buttonColor), // Mengatur border dengan warna biru
+                ),
+                minimumSize: const Size(double.infinity, 50),
               ),
               onPressed: () => Navigator.pop(context),
+              child: const Text('Daftar Sekarang'),
             ),
           ],
         ),

@@ -15,14 +15,26 @@ dependencies:
   firebase_auth: ^4.10.0
   cloud_firestore: ^4.9.2
   firebase_storage: ^11.2.7
-  file_picker: ^5.5.0
   image_picker: ^1.0.4
   uuid: ^4.1.0
+  flutter_custom_carousel_slider: ^1.2.0
+  carousel_slider: ^4.2.1
+  flutter_rating_bar: ^4.0.1
+  google_sign_in: ^6.1.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.2
+  flutter_native_splash: ^2.3.3
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/logo.png
+
+  android_12:
+    image: assets/logo.png
+    color: "#FFFFFF"
 
 flutter:
   uses-material-design: true

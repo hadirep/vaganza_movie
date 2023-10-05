@@ -19,38 +19,58 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: primaryColor,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(55),
+        child: AppBar(
+          elevation: 1,
+          title: const Text(
+            'Reset Password',
+            style: TextStyle(
+              color: secondaryColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          backgroundColor: primaryColor,
+          leading: IconButton(
+            color: secondaryColor,
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+      ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 30),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const Center(
+              child: Text(
+                  "Masukkan email yang digunakan pada saat registrasi."
+                      "Kode verifikasi akan dikirimkan ke email tersebut."
+              ),
+            ),
             _isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : Container(),
-            const SizedBox(height: 24.0),
-            Image.asset('assets/logo.png'),
-            const SizedBox(height: 12),
-            Text(
-              'Reset your password',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: 8.0),
+            const SizedBox(height: 20),
+            const Text("EMAIL", style: TextStyle(color: buttonColor)),
             TextField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
                 hintText: 'Email',
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 8),
             MaterialButton(
-              color: secondaryColor,
+              color: buttonColor,
               textTheme: ButtonTextTheme.primary,
               height: 50,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(8),
               ),
               onPressed: () async {
                 setState(() {

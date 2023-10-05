@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vaganza_movie/common/styles.dart';
 import 'package:vaganza_movie/ui/admin/admin_play_page.dart';
-import 'package:vaganza_movie/ui/admin/admin_rating_page.dart';
 import 'package:vaganza_movie/ui/admin/admin_upcoming_page.dart';
 import 'package:vaganza_movie/ui/home_page.dart';
 import 'package:vaganza_movie/ui/login_page.dart';
@@ -26,7 +25,7 @@ class _AdminPageState extends State<AdminPage> {
           title: const Center(
             child: Text(
               'Admin Page',
-              style: TextStyle(color: darkPrimaryColor),
+              style: TextStyle(color: secondaryColor),
             ),
           ),
           backgroundColor: primaryColor,
@@ -93,17 +92,6 @@ class _AdminPageState extends State<AdminPage> {
                 ),
                 onTap: () {
                   Navigator.pushNamed(context, AdminPlayPage.routeName);
-                },
-              ),
-            ),
-            Card(
-              child: ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                title: const Center(
-                  child: Text("Admin Rating Page"),
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, AdminRatingPage.routeName);
                 },
               ),
             ),
